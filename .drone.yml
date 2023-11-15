@@ -1,0 +1,23 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: build
+    image: python:3.9
+    commands:
+      - pip install -r requirements.txt
+      - python your_app.py
+      - docker build -t aminetudo/test_ci .
+
+  - name: publish
+    image: plugins/docker
+    settings:
+      registry: docker.io
+      repo: aminetudo/test_ci
+      tags: latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+    when:
+      event: [push, tag]
