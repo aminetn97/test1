@@ -3,21 +3,14 @@ name: default
 
 steps:
   - name: build
-    image: python:3.8-buster
+    image: docker:19.03 
     commands:
-      - pip install -r requirements.txt
-      - python your_app.py
       - docker build -t aminetudo/test_ci .
+      - docker run aminetudo/test_ci python app.py
 
-  - name: publish
-    image: plugins/docker
-    settings:
-      registry: docker.io
-      repo: aminetudo/test_ci
-      tags: latest
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-    when:
-      event: [push, tag]
+  - name: docker_build
+    image: docker:19.03 
+    commands:
+      - docker build -t aminetudo/test_ci .
+      - docker login -u yourusername -p docker_password
+      - docker push aminetudo/test_ci
