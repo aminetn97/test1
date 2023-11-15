@@ -16,4 +16,4 @@ EXPOSE 80
 
 # Define the command to run your application
 CMD ["python", "your_app.py"]
-CMD ["tail", "-f", "/dev/null"]
+# CMD ["tail", "-f", "/dev/null"]
