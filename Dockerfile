@@ -12,7 +12,7 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 RUN apt-get update && apt-get install -y glpk-utils \
     && pip install -r requirements.txt
 # Make port 80 available to the world outside this container
-EXPOSE 80
+EXPOSE 800
 
 # Define the command to run your application
 CMD ["python", "your_app.py"]
